@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-
+  resources :tenants
   resources :members
   get 'home/index'
 
@@ -13,12 +13,12 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, :controllers => { 
-    :registrations => "registrations",
+    :registrations => "milia/registrations",
     :confirmations => "confirmations",
     :sessions => "milia/sessions", 
     :passwords => "milia/passwords", 
   }
 
   match '/plan/edit' => 'tenant#edit', via: :get, as: :edit_plan
-  
+  match '/plan/update' => 'tenants#update', via: [:put, :patch], as: :update_plan
 end
